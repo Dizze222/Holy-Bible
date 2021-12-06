@@ -1,6 +1,6 @@
 package com.example.holybible.data
 
-import BooksDomain
+import com.example.holybible.domain.BooksDomain
 import com.example.holybible.core.Abstract
 import com.example.holybible.core.Book
 

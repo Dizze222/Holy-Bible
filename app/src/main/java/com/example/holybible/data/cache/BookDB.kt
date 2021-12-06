@@ -6,7 +6,7 @@ import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
 
-class BookDB : RealmObject(),Abstract.Mapable<Book,BookCacheMapper>{
+open class BookDB : RealmObject(),Abstract.Mapable<Book,BookCacheMapper>{
     @PrimaryKey
     var id: Int = -1
     var name: String = ""
