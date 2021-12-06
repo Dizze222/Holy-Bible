@@ -1,6 +1,5 @@
 package com.example.holybible.domain
 
-import BooksDomain
 import com.example.holybible.data.BooksDataToDomainMapper
 import com.example.holybible.data.BooksRepository
 
