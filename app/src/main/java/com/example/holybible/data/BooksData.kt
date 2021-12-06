@@ -1,21 +1,16 @@
 package com.example.holybible.data
 
+import BooksDomain
 import com.example.holybible.core.Abstract
-
 import com.example.holybible.core.Book
-import com.example.holybible.data.net.BooksDataToDomainMapper
-import com.example.holybible.domain.BookDomain
 
-sealed class BooksData : Abstract.Object<BookDomain, BooksDataToDomainMapper>() {
+sealed class BooksData : Abstract.Object<BooksDomain, BooksDataToDomainMapper>() {
     class Success(private val books: List<Book>) : BooksData() {
-        override fun map(mapper: BooksDataToDomainMapper): BookDomain = mapper.map(books)
+        override fun map(mapper: BooksDataToDomainMapper) = mapper.map(books)
     }
 
     class Fail(private val e: Exception) : BooksData() {
-        override fun map(mapper: BooksDataToDomainMapper): BookDomain = mapper.map(e)
-    }
-    interface BooksDataToDomainMapper : Abstract.Mapper{
-        fun map(books: List<Book>) : BookDomain
-        fun map(e: Exception) : BookDomain
+        override fun map(mapper: BooksDataToDomainMapper) = mapper.map(e)
     }
 }
+
