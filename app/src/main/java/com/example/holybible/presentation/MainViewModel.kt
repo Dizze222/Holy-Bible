@@ -10,21 +10,23 @@ import com.example.holybible.domain.BooksDomainToUiMapper
 import com.example.holybible.domain.BooksInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withContext//todo interface//todo interface
 
-class MainViewModel(private val booksInteractor: BooksInteractor,
-                    private val mapper: BooksDomainToUiMapper,
-                    private val communication: BooksCommunication) : ViewModel() {
+class MainViewModel(
+    private val booksInteractor: BooksInteractor,
+    private val mapper: BooksDomainToUiMapper,
+    private val communication: BooksCommunication
+) : ViewModel() {
 
-    fun fetchBooks() = viewModelScope.launch(Dispatchers.IO){
+    fun fetchBooks() = viewModelScope.launch(Dispatchers.IO) {
         val resultDomain = booksInteractor.fetchBooks()
-        withContext(Dispatchers.Main){
+        withContext(Dispatchers.Main) {
             val resultUi = resultDomain.map(mapper)
             resultUi.map(Abstract.Mapper.Empty())
         }
     }
-    fun observe(owner: LifecycleOwner,observer: Observer<List<Book>>){
-        communication.observeSuccess(owner,observer)
-    }
 
+    fun observe(owner: LifecycleOwner, observer: Observer<List<Book>>) {
+        communication.observeSuccess(owner, observer)
+    }
 }

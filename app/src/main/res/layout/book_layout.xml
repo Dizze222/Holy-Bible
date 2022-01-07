@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/textView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/TextAppearance.AppCompat.Body1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/padding8"
-    android:text="Text"
-    style="@style/TextAppearance.AppCompat.Body1"
-    >
-
-</TextView>
+    tools:text="Genesis" />

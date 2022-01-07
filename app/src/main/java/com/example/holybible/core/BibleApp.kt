@@ -1,20 +1,20 @@
 package com.example.holybible.core
 
 import android.app.Application
+import com.example.holybible.data.network.BooksCloudMapper
 
 import com.example.holybible.presentation.BaseBooksDomainToUiMapper
 import com.example.holybible.presentation.BooksCommunication
 import com.example.holybible.presentation.MainViewModel
 import com.example.holybible.presentation.ResourceProvider
-import com.example.holybible.data.BooksCloudDataSource
-import com.example.holybible.data.BooksCloudMapper
+import com.example.holybible.data.network.BooksCloudDataSource
 import com.example.holybible.data.BooksRepository
 import com.example.holybible.data.cache.BookCacheMapper
 import com.example.holybible.data.cache.BooksCacheDataSource
 import com.example.holybible.data.cache.BooksCacheMapper
 import com.example.holybible.data.cache.RealmProvider
-import com.example.holybible.data.net.BookCloudMapper
-import com.example.holybible.data.net.BooksService
+import com.example.holybible.data.network.BookCloudMapper
+import com.example.holybible.data.network.BooksService
 import com.example.holybible.domain.BaseBooksDataToDomainMapper
 import com.example.holybible.domain.BooksInteractor
 import io.realm.Realm
@@ -47,9 +47,10 @@ class BibleApp : Application() {
             booksCacheMapper
         )
         val booksInteractor = BooksInteractor.Base(booksRepository, BaseBooksDataToDomainMapper())
-
+        val communication = BooksCommunication.Base()
         mainViewModel = MainViewModel(
-            booksInteractor,BaseBooksDomainToUiMapper(
-                BooksCommunication.Base(),ResourceProvider.Base(this)), BooksCommunication.Base())
+                booksInteractor,BaseBooksDomainToUiMapper(
+                communication,ResourceProvider.Base(this)),
+                communication)
     }
 }

@@ -1,8 +1,9 @@
 package com.example.holybible.data
 
-import android.util.Log
 import com.example.holybible.data.cache.BooksCacheDataSource
 import com.example.holybible.data.cache.BooksCacheMapper
+import com.example.holybible.data.network.BooksCloudDataSource
+import com.example.holybible.data.network.BooksCloudMapper
 
 interface BooksRepository {
 
