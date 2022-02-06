@@ -4,6 +4,7 @@ import com.example.holybible.data.cache.BooksCacheDataSource
 import com.example.holybible.data.cache.BooksCacheMapper
 import com.example.holybible.data.network.BooksCloudDataSource
 import com.example.holybible.data.network.BooksCloudMapper
+import kotlinx.coroutines.delay
 
 interface BooksRepository {
 
@@ -17,6 +18,7 @@ interface BooksRepository {
     ) : BooksRepository {
 
         override suspend fun fetchBooks() = try {
+
             val booksCacheList = cacheDataSource.fetchBooks()
             if (booksCacheList.isEmpty()) {
                 val booksCloudList = cloudDataSource.fetchBooks()

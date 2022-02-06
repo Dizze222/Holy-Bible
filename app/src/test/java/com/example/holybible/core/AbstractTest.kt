@@ -1,6 +1,5 @@
 package com.example.holybible.core
 
-import com.example.holybible.core.Abstract
 import junit.framework.Assert.assertTrue
 import org.junit.Test
 import java.io.IOException
@@ -20,7 +19,7 @@ class AbstractTest {
         val domainObject = dataObject.map(DataMapper.Base())
         assertTrue(domainObject is DomainObject.Fail)
     }
-    sealed class TestDataObject : Abstract.Object<DomainObject,DataMapper>(){
+    sealed class TestDataObject : Abstract.Object<DomainObject,DataMapper>{
         abstract  override fun map(mapper: DataMapper) : DomainObject
 
         class Success(private val textOne: String,private val textTwo: String) : TestDataObject(){
@@ -32,7 +31,7 @@ class AbstractTest {
 
         }
     }
-    sealed class DomainObject : Abstract.Object<UIObject,DomainToUIMapper>(){
+    sealed class DomainObject : Abstract.Object<UIObject,DomainToUIMapper>{
 
         class Success(private val textCombined: String) : DomainObject(){
             override fun map(mapper: DomainToUIMapper) : UIObject{
