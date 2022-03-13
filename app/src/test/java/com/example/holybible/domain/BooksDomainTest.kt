@@ -40,6 +40,7 @@ class BooksDomainTest {
                     BookDomain.Base(66, "Revelation"),
                 ), bookMapper
             )
+
         )
         assertEquals(expected, actual)
     }
