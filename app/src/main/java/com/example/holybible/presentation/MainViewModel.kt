@@ -4,20 +4,17 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.holybible.core.Abstract
 import com.example.holybible.domain.BooksDomainToUiMapper
 import com.example.holybible.domain.BooksInteractor
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext//todo interface//todo interface
+import kotlinx.coroutines.withContext
 
 class MainViewModel(
     private val booksInteractor: BooksInteractor,
     private val mapper: BooksDomainToUiMapper,
     private val communication: BooksCommunication
 ) : ViewModel() {
-
     fun fetchBooks() {
         communication.map(listOf(BookUI.Progress))
         viewModelScope.launch(Dispatchers.IO) {

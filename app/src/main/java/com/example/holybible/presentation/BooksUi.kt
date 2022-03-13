@@ -8,7 +8,7 @@ import com.example.holybible.domain.ErrorType
 
 sealed class BooksUi : Abstract.Object<Unit, BooksCommunication> {
 
-    class Success(private val books: List<BookDomain>,private val bookMapper: BookDomainToUIMapper) : BooksUi() {
+ data class Success(private val books: List<BookDomain>,private val bookMapper: BookDomainToUIMapper) : BooksUi() {
 
         override fun map(mapper: BooksCommunication) {
             val booksUI = books.map {
@@ -18,7 +18,7 @@ sealed class BooksUi : Abstract.Object<Unit, BooksCommunication> {
         }
     }
 
-    class Fail(
+  data class Fail(
         private val errorType: ErrorType,
         private val resourceProvider: ResourceProvider
     ) : BooksUi() {

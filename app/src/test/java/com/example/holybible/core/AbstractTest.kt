@@ -20,7 +20,7 @@ class AbstractTest {
         assertTrue(domainObject is DomainObject.Fail)
     }
     sealed class TestDataObject : Abstract.Object<DomainObject,DataMapper>{
-        abstract  override fun map(mapper: DataMapper) : DomainObject
+        abstract override fun map(mapper: DataMapper) : DomainObject
 
         class Success(private val textOne: String,private val textTwo: String) : TestDataObject(){
             override fun map(mapper: DataMapper) = mapper.map(textOne,textTwo)
@@ -71,5 +71,5 @@ class AbstractTest {
     }
 
 
-
 }
+

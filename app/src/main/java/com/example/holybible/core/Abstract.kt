@@ -1,14 +1,12 @@
 package com.example.holybible.core
 
-abstract class Abstract  {
+abstract class Abstract {
 
-    interface Object<T, M :Mapper >{
-
-        fun map(mapper: M) : T
-
+    interface Object<T, M : Mapper> {
+        fun map(mapper: M): T
     }
 
-    interface Mapper{
+    interface Mapper {
         class Empty : Mapper
     }
 

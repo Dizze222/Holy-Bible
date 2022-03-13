@@ -6,15 +6,19 @@ import android.util.Log
 import com.example.holybible.core.BibleApp
 import com.example.holybible.databinding.ActivityMainBinding
 import com.example.holybible.presentation.BibleAdapter
+import com.example.holybible.presentation.BookUI
+import com.example.holybible.presentation.CheckToValidData
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val name = "Jude"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val viewModel = (application as BibleApp).mainViewModel
-        val adapter = BibleAdapter(object : BibleAdapter.Retry{
+        val adapter = BibleAdapter(object : BibleAdapter.Retry {
             override fun tryAgain() {
                 viewModel.fetchBooks()
             }
@@ -24,7 +28,5 @@ class MainActivity : AppCompatActivity() {
             adapter.update(it)
         })
         viewModel.fetchBooks()
-        val version = BuildConfig.VERSION_CODE
-        Log.i("TAG",version.toString())
     }
 }

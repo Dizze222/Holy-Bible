@@ -1,5 +1,5 @@
 package com.example.holybible.data
-
+/*
 import com.example.holybible.core.Book
 import com.example.holybible.data.cache.BookCacheMapper
 import com.example.holybible.data.cache.BookDB
@@ -15,8 +15,10 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 import java.io.IOException
 
-class BooksRepositorySaveBooksTest : BaseBooksRepositoryTest(){
+ */
 
+class BooksRepositorySaveBooksTest : BaseBooksRepositoryTest(){
+/*
     @Test
     fun test_save_books() = runBlocking{
         val testCloudDataSource = TestBooksCloudDataSource()
@@ -73,6 +75,8 @@ class BooksRepositorySaveBooksTest : BaseBooksRepositoryTest(){
     }
 
 
+
+ */
 
 
 }

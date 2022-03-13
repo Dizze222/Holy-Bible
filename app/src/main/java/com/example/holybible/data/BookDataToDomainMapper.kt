@@ -5,5 +5,4 @@ import com.example.holybible.domain.BookDomain
 
 interface BookDataToDomainMapper : Abstract.Mapper {
     fun map(id: Int,name: String) : BookDomain
-
 }

@@ -18,7 +18,6 @@ interface BooksRepository {
     ) : BooksRepository {
 
         override suspend fun fetchBooks() = try {
-
             val booksCacheList = cacheDataSource.fetchBooks()
             if (booksCacheList.isEmpty()) {
                 val booksCloudList = cloudDataSource.fetchBooks()

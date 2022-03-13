@@ -1,5 +1,5 @@
 package com.example.holybible.data
-
+/*
 import com.example.holybible.core.Book
 import com.example.holybible.data.cache.BookCacheMapper
 import com.example.holybible.data.cache.BookDB
@@ -15,9 +15,11 @@ import org.junit.Test
 import java.io.IOException
 import java.net.UnknownHostException
 
-class BooksRepositoryTest : BaseBooksRepositoryTest(){
-    private val unknownHostException = UnknownHostException()
 
+ */
+class BooksRepositoryTest : BaseBooksRepositoryTest(){
+   // private val unknownHostException = UnknownHostException()
+/*
     @Test
     fun test_no_connection_no_cache() = runBlocking{
         val testCloudDataSource = TestBooksCloudDataSource(false)
@@ -140,6 +142,8 @@ class BooksRepositoryTest : BaseBooksRepositoryTest(){
         }
 
     }
+
+ */
 
 
 }

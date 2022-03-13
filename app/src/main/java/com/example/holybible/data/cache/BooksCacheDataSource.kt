@@ -10,7 +10,9 @@ interface BooksCacheDataSource {
 
     fun saveBooks(books: List<BookData>)
 
-    class Base(private val realmProvider: RealmProvider,private val mapper: BookDataToDBMapper) : BooksCacheDataSource {
+    class Base(private val realmProvider: RealmProvider, private val mapper: BookDataToDBMapper) :
+        BooksCacheDataSource {
+
         override fun fetchBooks(): List<BookDB> {
             realmProvider.provide().use { realm ->
                 val booksDB = realm.where(BookDB::class.java).findAll() ?: emptyList()
@@ -21,7 +23,7 @@ interface BooksCacheDataSource {
         override fun saveBooks(books: List<BookData>) = realmProvider.provide().use { realm ->
             realm.executeTransaction {
                 books.forEach { book ->
-                    book.mapTo(mapper,realm)
+                    book.mapTo(mapper, realm)
                 }
             }
         }
