@@ -21,6 +21,7 @@ class BooksDomainTest {
         ), object : BookDataToDomainMapper {
             override fun map(id: Int, name: String) = BookDomain.Base(id, name)
         }
+
         )
         val actual = domain.map(object : BooksDomainToUiMapper {
             override fun map(books: List<BookDomain>) = BooksUi.Success(books, bookMapper)
