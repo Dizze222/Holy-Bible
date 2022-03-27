@@ -24,7 +24,7 @@ class BooksDomainTest {
 
         )
         val actual = domain.map(object : BooksDomainToUiMapper {
-            override fun map(books: List<BookDomain>) = BooksUi.Success(books, bookMapper)
+            override fun map(books: List<BookDomain>) = BooksUi.Base(books, bookMapper)
 
 
             override fun map(errorType: ErrorType): BooksUi {
@@ -32,7 +32,7 @@ class BooksDomainTest {
             }
         })
         val expected = listOf<BooksUi>(
-            BooksUi.Success(
+            BooksUi.Base(
                 listOf(
                     BookDomain.Testament(TestamentType.OLD),
                     BookDomain.Base(1, "genesis"),

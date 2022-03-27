@@ -2,12 +2,11 @@ package com.example.holybible
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.holybible.core.BibleApp
 import com.example.holybible.databinding.ActivityMainBinding
 import com.example.holybible.presentation.BibleAdapter
-import com.example.holybible.presentation.BookUI
-import com.example.holybible.presentation.CheckToValidData
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
         viewModel.observe(this, {
             adapter.update(it)
         })
