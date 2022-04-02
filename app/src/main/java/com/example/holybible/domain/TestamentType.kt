@@ -11,4 +11,3 @@ enum class TestamentType(private val id: Int) : Abstract.Object<BookUI,BookDomai
     override fun matches(arg: Int) = id == arg
     override fun map(mapper: BookDomainToUIMapper) = mapper.map(id, name)
 }
-

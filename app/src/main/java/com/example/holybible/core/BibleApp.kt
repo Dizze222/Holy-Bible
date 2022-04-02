@@ -46,7 +46,8 @@ class BibleApp : Application() {
         val service = retrofit.create(BooksService::class.java)
         val gson = Gson()
         val cloudDataSource = BooksCloudDataSource.Base(service, gson)
-        val cacheDataSource = BooksCacheDataSource.Base(RealmProvider.Base(),BookDataToDBMapper.Base())
+        val cacheDataSource =
+            BooksCacheDataSource.Base(RealmProvider.Base(), BookDataToDBMapper.Base())
         val toBookMapper = ToBookMapper.Base()
         val booksCloudMapper = BooksCloudMapper.Base(toBookMapper)
         val booksCacheMapper = BooksCacheMapper.Base(toBookMapper)
@@ -57,10 +58,16 @@ class BibleApp : Application() {
             booksCloudMapper,
             booksCacheMapper
         )
-        val booksInteractor = BooksInteractor.Base(booksRepository, BaseBooksDataToDomainMapper(BaseBookDataToDomainMapper()))
+        val booksInteractor = BooksInteractor.Base(
+            booksRepository,
+            BaseBooksDataToDomainMapper(BaseBookDataToDomainMapper())
+        )
         val communication = BooksCommunication.Base()
         val resourceProvider = ResourceProvider.Base(this)
         mainViewModel = MainViewModel(
-            booksInteractor, BaseBooksDomainToUiMapper(resourceProvider,BaseBookDomainToUIMapper(resourceProvider)), communication)
+            booksInteractor,
+            BaseBooksDomainToUiMapper(resourceProvider, BaseBookDomainToUIMapper(resourceProvider)),
+            communication,UIDataCache.Base(IdCache.Base(this))
+        )
     }
 }
