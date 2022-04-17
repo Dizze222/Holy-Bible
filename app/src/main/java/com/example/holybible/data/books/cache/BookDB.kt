@@ -1,8 +1,8 @@
-package com.example.holybible.data.cache
+package com.example.holybible.data.books.cache
 
 import com.example.holybible.core.Abstract
-import com.example.holybible.data.BookData
-import com.example.holybible.data.ToBookMapper
+import com.example.holybible.data.books.BookData
+import com.example.holybible.data.books.ToBookMapper
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
@@ -12,5 +12,5 @@ open class BookDB : RealmObject(),Abstract.Object<BookData, ToBookMapper>{
     var id: Int = -1
     var name: String = ""
     var testament: String = ""
-    override fun map(mapper: ToBookMapper) = BookData(id,name,testament)
+    override fun map(mapper: ToBookMapper) = mapper.map(id,name,testament)
 }

@@ -1,9 +1,9 @@
 package com.example.holybible.domain
 
-import com.example.holybible.data.BookData
-import com.example.holybible.data.BookDataToDomainMapper
-import com.example.holybible.data.BooksDataToDomainMapper
-import com.example.holybible.data.TestamentTemp
+import com.example.holybible.data.books.BookData
+import com.example.holybible.data.books.BookDataToDomainMapper
+import com.example.holybible.data.books.BooksDataToDomainMapper
+import com.example.holybible.data.books.TestamentTemp
 import retrofit2.HttpException
 import java.net.UnknownHostException
 

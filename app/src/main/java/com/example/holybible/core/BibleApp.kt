@@ -1,20 +1,18 @@
 package com.example.holybible.core
 
 import android.app.Application
-import com.example.holybible.data.BookDataToDBMapper
-import com.example.holybible.data.BookDataToDomainMapper
-import com.example.holybible.data.network.BooksCloudMapper
+import com.example.holybible.data.books.BookDataToDBMapper
+import com.example.holybible.data.books.cloud.BooksCloudMapper
 
-import com.example.holybible.data.network.BooksCloudDataSource
-import com.example.holybible.data.BooksRepository
-import com.example.holybible.data.ToBookMapper
-import com.example.holybible.data.cache.BooksCacheDataSource
-import com.example.holybible.data.cache.BooksCacheMapper
-import com.example.holybible.data.cache.RealmProvider
-import com.example.holybible.data.network.BooksService
+import com.example.holybible.data.books.cloud.BooksCloudDataSource
+import com.example.holybible.data.books.BooksRepository
+import com.example.holybible.data.books.ToBookMapper
+import com.example.holybible.data.books.cache.BooksCacheDataSource
+import com.example.holybible.data.books.cache.BooksCacheMapper
+import com.example.holybible.data.books.cache.RealmProvider
+import com.example.holybible.data.books.cloud.BooksService
 import com.example.holybible.domain.BaseBookDataToDomainMapper
 import com.example.holybible.domain.BaseBooksDataToDomainMapper
-import com.example.holybible.domain.BookDomainToUIMapper
 import com.example.holybible.domain.BooksInteractor
 import com.example.holybible.presentation.*
 import com.google.gson.Gson
@@ -45,7 +43,7 @@ class BibleApp : Application() {
             .build()
         val service = retrofit.create(BooksService::class.java)
         val gson = Gson()
-        val cloudDataSource = BooksCloudDataSource.Base(service, gson)
+        val cloudDataSource = BooksCloudDataSource.Base(service, gson,TypeTokenProvider())
         val cacheDataSource =
             BooksCacheDataSource.Base(RealmProvider.Base(), BookDataToDBMapper.Base())
         val toBookMapper = ToBookMapper.Base()

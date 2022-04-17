@@ -1,7 +1,7 @@
 package com.example.holybible.domain
 
-import com.example.holybible.data.BooksDataToDomainMapper
-import com.example.holybible.data.BooksRepository
+import com.example.holybible.data.books.BooksDataToDomainMapper
+import com.example.holybible.data.books.BooksRepository
 
 interface BooksInteractor {
     suspend fun fetchBooks() : BooksDomain

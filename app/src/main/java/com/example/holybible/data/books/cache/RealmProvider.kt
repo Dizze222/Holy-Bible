@@ -1,4 +1,4 @@
-package com.example.holybible.data.cache
+package com.example.holybible.data.books.cache
 
 import io.realm.Realm
 

@@ -1,4 +1,4 @@
-package com.example.holybible.data
+package com.example.holybible.data.books
 
 
 import com.example.holybible.domain.BooksDomain

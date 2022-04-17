@@ -1,9 +1,8 @@
-package com.example.holybible.data.network
+package com.example.holybible.data.books.cloud
 
 import com.example.holybible.core.Abstract
-import com.example.holybible.data.BookData
-import com.example.holybible.data.ToBookMapper
-import com.google.gson.annotations.SerializedName
+import com.example.holybible.data.books.BookData
+import com.example.holybible.data.books.ToBookMapper
 
 /*{"id":1,"name":"Genesis","testament":"OT","genre":{"id":1,"name":"Law"}}*/
 

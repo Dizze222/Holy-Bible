@@ -1,10 +1,9 @@
-package com.example.holybible.data
+package com.example.holybible.data.books
 
-import com.example.holybible.data.cache.BooksCacheDataSource
-import com.example.holybible.data.cache.BooksCacheMapper
-import com.example.holybible.data.network.BooksCloudDataSource
-import com.example.holybible.data.network.BooksCloudMapper
-import kotlinx.coroutines.delay
+import com.example.holybible.data.books.cache.BooksCacheDataSource
+import com.example.holybible.data.books.cache.BooksCacheMapper
+import com.example.holybible.data.books.cloud.BooksCloudDataSource
+import com.example.holybible.data.books.cloud.BooksCloudMapper
 
 interface BooksRepository {
 

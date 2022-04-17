@@ -1,9 +1,9 @@
 package com.example.holybible.data
 /*
 import com.example.holybible.core.Book
-import com.example.holybible.data.cache.BookCacheMapper
-import com.example.holybible.data.cache.BookDB
-import com.example.holybible.data.network.BookCloudMapper
+import com.example.holybible.data.books.cache.BookCacheMapper
+import com.example.holybible.data.books.cache.BookDB
+import com.example.holybible.data.books.network.BookCloudMapper
  */
 
 abstract class BaseBooksRepositoryTest {

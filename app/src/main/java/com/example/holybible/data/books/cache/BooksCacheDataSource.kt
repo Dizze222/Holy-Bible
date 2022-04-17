@@ -1,8 +1,10 @@
-package com.example.holybible.data.cache
+package com.example.holybible.data.books.cache
 
 
-import com.example.holybible.data.BookData
-import com.example.holybible.data.BookDataToDBMapper
+import com.example.holybible.core.DbWrapper
+import com.example.holybible.data.books.BookData
+import com.example.holybible.data.books.BookDataToDBMapper
+import io.realm.Realm
 
 
 interface BooksCacheDataSource {
@@ -10,7 +12,11 @@ interface BooksCacheDataSource {
 
     fun saveBooks(books: List<BookData>)
 
-    class Base(private val realmProvider: RealmProvider, private val mapper: BookDataToDBMapper) :
+    class Base(
+        private val realmProvider: RealmProvider,
+        private val mapper: BookDataToDBMapper,
+        private val dbWrapper: DbWrapper.Base<BookDB>
+    ) :
         BooksCacheDataSource {
 
         override fun fetchBooks(): List<BookDB> {
@@ -27,5 +33,9 @@ interface BooksCacheDataSource {
                 }
             }
         }
+        private inner class BookDbWrapper(realm: Realm) : DbWrapper.Base<BookDB>(realm){
+            override fun dbClass(): Class<BookDB> = BookDB::class.java
+        }
     }
+
 }
