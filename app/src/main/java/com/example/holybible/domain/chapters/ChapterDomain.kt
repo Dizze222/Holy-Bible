@@ -1,9 +1,12 @@
 package com.example.holybible.domain.chapters
 
 import com.example.holybible.core.Abstract
+import com.example.holybible.data.chapters.ChapterId
+import com.example.holybible.presentation.chapters.ChapterUi
 
-class ChapterDomain(private val id: Int, bookId: Int) : Abstract.Object<ChapterUI,ChapterDomainToUiMapper>{
-    override fun map(mapper: ChapterDomainToUiMapper): ChapterUI {
-        TODO("Not yet implemented")
-    }
+
+
+data class ChapterDomain(private val chapterId: ChapterId) :
+    Abstract.Object<ChapterUi, ChapterDomainToUiMapper> {
+    override fun map(mapper: ChapterDomainToUiMapper) = mapper.map(chapterId)
 }

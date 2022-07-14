@@ -5,6 +5,8 @@ import com.example.holybible.data.books.cache.BooksCacheMapper
 import com.example.holybible.data.books.cloud.BooksCloudDataSource
 import com.example.holybible.data.books.cloud.BooksCloudMapper
 
+
+
 interface BooksRepository {
 
     suspend fun fetchBooks(): BooksData
@@ -17,11 +19,11 @@ interface BooksRepository {
     ) : BooksRepository {
 
         override suspend fun fetchBooks() = try {
-            val booksCacheList = cacheDataSource.fetchBooks()
+            val booksCacheList = cacheDataSource.read()
             if (booksCacheList.isEmpty()) {
                 val booksCloudList = cloudDataSource.fetchBooks()
                 val books = booksCloudMapper.map(booksCloudList)
-                cacheDataSource.saveBooks(books)
+                cacheDataSource.save(books)
                 BooksData.Success(books)
             } else {
                 BooksData.Success(booksCacheMapper.map(booksCacheList))

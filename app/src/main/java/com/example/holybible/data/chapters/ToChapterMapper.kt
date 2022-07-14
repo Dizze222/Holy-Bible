@@ -1,12 +1,32 @@
 package com.example.holybible.data.chapters
 
 import com.example.holybible.core.Abstract
-import com.example.holybible.domain.chapters.ChapterDomain
+import com.example.holybible.core.Read
 
-interface ToChapterMapper : Abstract.Mapper{
-   fun map(id: Int, bookId: Int) : ChapterData
 
-    class Base : ToChapterMapper{
-        override fun map(id: Int, bookId: Int) = ChapterData(id,bookId)
+
+interface ToChapterMapper : Abstract.Mapper.Data<Int, ChapterData> {
+
+    abstract class Base(private val bookCache: Read<Pair<Int, String>>) : ToChapterMapper {
+        override fun map(data: Int): ChapterData {
+            val realId = realId()
+            return ChapterData(
+                ChapterId.Base(
+                    bookCache.read().first,
+                    if (realId) data else 0,
+                    if (realId) 0 else data
+                )
+            )
+        }
+
+        protected abstract fun realId(): Boolean
+    }
+
+    class Cloud(bookCache: Read<Pair<Int, String>>) : ToChapterMapper.Base(bookCache) {
+        override fun realId() = true
+    }
+
+    class Db(bookCache: Read<Pair<Int, String>>) : ToChapterMapper.Base(bookCache) {
+        override fun realId() = false
     }
 }

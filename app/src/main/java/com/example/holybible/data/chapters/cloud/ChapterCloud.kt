@@ -1,22 +1,15 @@
 package com.example.holybible.data.chapters.cloud
 
+
+import com.example.holybible.core.Abstract
 import com.example.holybible.data.chapters.ChapterData
 import com.example.holybible.data.chapters.ToChapterMapper
-import com.example.holybible.core.Abstract
-import java.lang.IllegalStateException
+import com.google.gson.annotations.SerializedName
+
 
 data class ChapterCloud(
+    @SerializedName("id")
     private val id: Int
 ) : Abstract.Object<ChapterData, ToChapterMapper> {
-    override fun map(mapper: ToChapterMapper): ChapterData =
-        throw IllegalStateException("can't be used")
-
-    fun map(bookId: Int, mapper: ToChapterMapper) = mapper.map(id, bookId)
+    override fun map(mapper: ToChapterMapper) = mapper.map(id)
 }
-
-data class ChapterCloudWrapper(private val chapterCloud: ChapterCloud, private val bookId: Int) :
-    Abstract.Object<ChapterData, ToChapterMapper> {
-    override fun map(mapper: ToChapterMapper): ChapterData = chapterCloud.map(bookId, mapper)
-}
-
-

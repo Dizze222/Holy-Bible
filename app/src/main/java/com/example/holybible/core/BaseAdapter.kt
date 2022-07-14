@@ -1,5 +1,4 @@
 package com.example.holybible.core
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +6,7 @@ import android.widget.Button
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.holybible.R
-import com.example.holybible.presentation.BibleAdapter
+
 
 
 abstract class BaseAdapter<E : ComparableTextMapper<E>, T : BaseViewHolder<E>> :
@@ -45,10 +44,10 @@ abstract class BaseViewHolder<E : ComparableTextMapper<E>>(view: View) :
 
     class Fail<E : ComparableTextMapper<E>>(
         view: View,
-        private val retry: BibleAdapter.Retry
+        private val retry: Retry
     ) : BaseViewHolder<E>(view) {
         private val message = itemView.findViewById<CustomTextView>(R.id.messageTextView)
-        private val button = itemView.findViewById<Button>(R.id.tryAgainButton)
+        private val button = itemView.findViewById<Button>(R.id.button)
         override fun bind(item: E) {
             item.map(message)
             button.setOnClickListener {

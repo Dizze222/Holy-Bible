@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="horizontal"
     android:background="@color/purple_200"
     android:layout_height="wrap_content">
 
-    <TextView
+    <com.example.holybible.core.CustomTextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_weight="1"
@@ -16,11 +15,10 @@
         android:background="@color/purple_200"
         android:gravity="end"
         android:padding="@dimen/padding8"
-        android:text="AA"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/white" />
 
-    <ImageView
+    <com.example.holybible.core.CollapseView
         android:id="@+id/collapseImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

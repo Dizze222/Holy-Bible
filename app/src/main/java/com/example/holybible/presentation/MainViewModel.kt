@@ -3,36 +3,29 @@ package com.example.holybible.presentation
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.holybible.domain.BooksDomainToUiMapper
-import com.example.holybible.domain.BooksInteractor
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.holybible.core.Read
+
 
 class MainViewModel(
-    private val booksInteractor: BooksInteractor,
-    private val mapper: BooksDomainToUiMapper,
-    private val communication: BooksCommunication,
-    private val cache: UIDataCache
+    private val navigator: Read<Int>,
+    private val communication: NavigationCommunication
 ) : ViewModel() {
-    fun fetchBooks() {
-        communication.map(listOf(BookUI.Progress))
-        viewModelScope.launch(Dispatchers.IO) {
-            val resultDomain = booksInteractor.fetchBooks()
-            val resultUi = resultDomain.map(mapper)
-            resultUi.cache(cache)
-            withContext(Dispatchers.Main) {
-                resultUi.map(communication)
-            }
-        }
+
+    fun init() {
+        communication.map(navigator.read())
     }
 
-    fun observe(owner: LifecycleOwner, observer: Observer<List<BookUI>>) {
+    fun observe(owner: LifecycleOwner, observer: Observer<Int>) {
         communication.observe(owner, observer)
     }
 
-    fun collapseOrExpand(id: Int) {
-        communication.map(cache.changeState(id))
+    fun navigateBack(): Boolean {
+        val currentScreen = navigator.read()
+        val exit = currentScreen == 0
+        if (!exit) {
+            val newScreen = currentScreen - 1
+            communication.map(newScreen)
+        }
+        return exit
     }
 }

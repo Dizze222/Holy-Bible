@@ -2,40 +2,36 @@ package com.example.holybible.data.books.cache
 
 
 import com.example.holybible.core.DbWrapper
+import com.example.holybible.core.Read
+import com.example.holybible.core.RealmProvider
+import com.example.holybible.core.Save
 import com.example.holybible.data.books.BookData
-import com.example.holybible.data.books.BookDataToDBMapper
 import io.realm.Realm
 
-
-interface BooksCacheDataSource {
-    fun fetchBooks(): List<BookDB>
-
-    fun saveBooks(books: List<BookData>)
+interface BooksCacheDataSource : Save<List<BookData>>, Read<List<BookDb>> {
 
     class Base(
         private val realmProvider: RealmProvider,
-        private val mapper: BookDataToDBMapper,
-        private val dbWrapper: DbWrapper.Base<BookDB>
-    ) :
-        BooksCacheDataSource {
+        private val mapper: BookDataToDbMapper,
+    ) : BooksCacheDataSource {
 
-        override fun fetchBooks(): List<BookDB> {
+        override fun read(): List<BookDb> {
             realmProvider.provide().use { realm ->
-                val booksDB = realm.where(BookDB::class.java).findAll() ?: emptyList()
-                return realm.copyFromRealm(booksDB)
+                val booksDb = realm.where(BookDb::class.java).findAll() ?: emptyList()
+                return realm.copyFromRealm(booksDb)
             }
         }
 
-        override fun saveBooks(books: List<BookData>) = realmProvider.provide().use { realm ->
+        override fun save(data: List<BookData>) = realmProvider.provide().use { realm ->
             realm.executeTransaction {
-                books.forEach { book ->
-                    book.mapTo(mapper, realm)
+                data.forEach { book ->
+                    book.mapBy(mapper, BookDbWrapper(it))
                 }
             }
         }
-        private inner class BookDbWrapper(realm: Realm) : DbWrapper.Base<BookDB>(realm){
-            override fun dbClass(): Class<BookDB> = BookDB::class.java
+
+        private inner class BookDbWrapper(realm: Realm) : DbWrapper.Base<BookDb>(realm) {
+            override fun dbClass() = BookDb::class.java
         }
     }
-
 }

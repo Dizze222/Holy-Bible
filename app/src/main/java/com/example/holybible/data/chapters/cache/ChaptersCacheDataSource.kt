@@ -1,40 +1,45 @@
 package com.example.holybible.data.chapters.cache
 
 import com.example.holybible.core.DbWrapper
-import com.example.holybible.data.books.cache.RealmProvider
+import com.example.holybible.core.RealmProvider
+import com.example.holybible.core.Save
 import com.example.holybible.data.chapters.ChapterData
+import com.example.holybible.data.chapters.ChapterId
+
 import io.realm.Realm
 
-interface ChaptersCacheDataSource {
-    fun fetchChapters(bookId: Int): List<ChapterDB>
 
-    fun saveChapters(bookId: Int, chapters: List<ChapterData>)
+interface ChaptersCacheDataSource : Save<List<ChapterData>> {
+
+    fun fetchChapters(bookId: Int): List<ChapterDb>
 
     class Base(
         private val realmProvider: RealmProvider,
-        private val mapper: ChapterDataToDBMapper
+        private val mapper: ChapterDataToDbMapper
     ) : ChaptersCacheDataSource {
 
-        override fun fetchChapters(bookId: Int): List<ChapterDB> {
+        override fun fetchChapters(bookId: Int): List<ChapterDb> {
+            val chapterId = ChapterId.Base(bookId)
             realmProvider.provide().use { realm ->
-                val chapters = realm.where(ChapterDB::class.java)
-                    .equalTo("bookId", bookId)
+                val chapters = realm.where(ChapterDb::class.java)
+                    .between("id", chapterId.min(), chapterId.max())
                     .findAll()
                 return realm.copyFromRealm(chapters)
             }
         }
 
-        override fun saveChapters(bookId: Int, chapters: List<ChapterData>) {
+        override fun save(data: List<ChapterData>) {
             realmProvider.provide().use { realm ->
-                chapters.forEach{ chapter ->
-                    chapter.mapTo(mapper,ChapterDBWrapper(realm))
-
+                realm.executeTransaction {
+                    data.forEach { chapter ->
+                        chapter.mapBy(mapper, ChapterDbWrapper(realm))
+                    }
                 }
             }
         }
-        private inner class ChapterDBWrapper(realm: Realm) : DbWrapper.Base<ChapterDB>(realm) {
-            override fun dbClass() = ChapterDB::class.java
+
+        private inner class ChapterDbWrapper(realm: Realm) : DbWrapper.Base<ChapterDb>(realm) {
+            override fun dbClass() = ChapterDb::class.java
         }
     }
-
 }
