@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Holy Bible</string>
+    <string name="no_connection_message">No connection</string>
+    <string name="service_unavailable">Service unavailble</string>
+    <string name="something_went_wrong">something went wrong</string>
+    <string name="try_again">Try again</string>
+    <string name="new_testament">New Testament</string>
+    <string name="old_testament">Old Testament</string>
 </resources>
