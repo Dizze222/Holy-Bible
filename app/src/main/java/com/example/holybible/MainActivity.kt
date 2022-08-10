@@ -12,6 +12,9 @@ import com.example.holybible.presentation.BibleAdapter
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val name = "Jude"
+    private val namee = "Jude"
+    private val naemee = "Jude"
+    private val naemeee = "Jude"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
